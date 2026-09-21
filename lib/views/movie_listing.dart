@@ -16,6 +16,10 @@ class MovieListing extends StatelessWidget {
       ),
       drawer: const NavDrawer(),
       body: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: cinemaBrand),
+          color: cinemaSurface
+        ),
         child: Column(
           children: [
             Text('Interstellar'),
