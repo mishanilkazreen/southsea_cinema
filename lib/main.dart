@@ -13,9 +13,14 @@ class App extends StatelessWidget {
       title: 'Sandwich Shop App',
       home: Scaffold(
         appBar: AppBar(title: const Text('Sandwich Counter')),
+          backgroundColor: Colors.orange,
         body: const Center(
-          child: Text('Welcome to the Sandwich Shop!')
-        )
+          child: OrderItemDisplay(5, 'Footlong'),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        ),
       )
     );
   }
@@ -25,7 +30,7 @@ class OrderItemDisplay extends StatelessWidget {
   final String itemType;
   final int quantity;
 
-  OrderItemDisplay(this.quantity, this.itemType, {super.key});
+  const OrderItemDisplay(this.quantity, this.itemType, {super.key});
 
   @override
   Widget build(BuildContext context) {
