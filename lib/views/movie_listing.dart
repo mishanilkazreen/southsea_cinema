@@ -13,6 +13,7 @@ class MovieListing extends StatefulWidget {
 
 class _MovieListingState extends State<MovieListing> {
   int _quantity = 0;
+  String _feedbackMessage = ''; // TO-DO: Convert to a Popup Notification
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,19 @@ class _MovieListingState extends State<MovieListing> {
                 for (int i = 0; i <= 5; i++)
                   DropdownMenuEntry(value: i, label: '$i')
               ],
-            )
+            ),
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+              // TO-DO: Convert to a Popup Notification
+              onPressed: () { 
+                setState(() {
+                  _feedbackMessage = '$_quantity tickets added to order';
+                });
+              },
+              child: const Text('ADD TO ORDER')
+            ),
+            const SizedBox(height: 16.0),
+            Text(_feedbackMessage), // TO-DO: Convert to a Popup Notification
           ],
         )
       )
