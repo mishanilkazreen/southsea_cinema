@@ -67,6 +67,11 @@ class _MovieListingState extends State<MovieListing> {
                     final ticketBookingWidget = [
                         DropdownMenu<int>(
                           initialSelection: 0,
+                          textStyle: const TextStyle(color: cinemaSurface),
+                          inputDecorationTheme: const InputDecorationTheme(
+                            filled: true,
+                            fillColor: cinemaFontWhite
+                          ),
                           onSelected: (int? value) {
                             if (value != null) {
                               setState(() {
