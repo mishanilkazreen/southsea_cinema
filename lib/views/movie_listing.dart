@@ -13,7 +13,6 @@ class MovieListing extends StatefulWidget {
 
 class _MovieListingState extends State<MovieListing> {
   int _quantity = 0;
-  String _feedbackMessage = ''; // TO-DO: Convert to a Popup Notification
 
   @override
   Widget build(BuildContext context) {
@@ -89,15 +88,13 @@ class _MovieListingState extends State<MovieListing> {
                 foregroundColor: cinemaFontWhite,
               ),
               onPressed: () {
-                setState(() {
-                  _feedbackMessage = '$_quantity tickets added to order';
-                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('$_quantity adult tickets added to order')
+                    )
+                  );
               },
               child: const Text('ADD TO ORDER')
-            ),
-            Text(
-              _feedbackMessage,
-              style: const TextStyle(color: cinemaFontWhite),
             ), // TO-DO: Convert to a Popup Notification
           ],
         )
