@@ -26,15 +26,17 @@ class _MovieListingState extends State<MovieListing> {
       ),
       drawer: const NavDrawer(),
       body: Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16.0,
           children: [
-            Text(
+            const Text(
               'Interstellar (2014) (PG-13)',
-              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+              style: TextStyle(
                 color: cinemaFontWhite,
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
               ),
             ),
             const Text(
@@ -49,10 +51,12 @@ class _MovieListingState extends State<MovieListing> {
               'Please note that Discounts / Membership Benefits will be applied once you have selected your tickets\nSelect Quantities (Up to 5 in total)',
               style: TextStyle(color: cinemaFontWhite),
             ),
-            Text(
+            const Text(
               'Tickets',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              style: TextStyle(
                 color: cinemaFontWhite,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
             Row(
