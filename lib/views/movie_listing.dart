@@ -30,6 +30,7 @@ class _MovieListingState extends State<MovieListing> {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 16.0,
               children: [
+                // Movie Title
                 const Text(
                   'Interstellar (2014) (PG-13)',
                   style: TextStyle(
@@ -38,10 +39,12 @@ class _MovieListingState extends State<MovieListing> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+                // Movie Description
                 const Text(
                   'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.',
                   style: TextStyle(color: cinemaFontWhite),
                 ),
+                // Booking Information
                 const Text(
                   'Southsea Cinema Room\nWednesday 23rd Sep 2026, 18:00 - ends at 19:54',
                   style: TextStyle(color: cinemaFontWhite),
@@ -50,6 +53,7 @@ class _MovieListingState extends State<MovieListing> {
                   'Please note that Discounts / Membership Benefits will be applied once you have selected your tickets\nSelect Quantities (Up to 5 in total)',
                   style: TextStyle(color: cinemaFontWhite),
                 ),
+                // Ticket Information
                 const Text(
                   'Tickets',
                   style: TextStyle(
@@ -111,8 +115,8 @@ class _MovieListingState extends State<MovieListing> {
                     }
                   },
                 ),
+                // Add to Order Button
                 ElevatedButton(
-                    // TO-DO: Convert to a Popup Notification
                     style: ElevatedButton.styleFrom(
                       backgroundColor: cinemaBrandDark,
                       foregroundColor: cinemaFontWhite,
@@ -123,7 +127,7 @@ class _MovieListingState extends State<MovieListing> {
                               Text('$_quantity adult tickets added to order')));
                     },
                     child: const Text(
-                        'ADD TO ORDER')), // TO-DO: Convert to a Popup Notification
+                        'ADD TO ORDER')),
               ],
             )));
   }
