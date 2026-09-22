@@ -2,12 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
-class MovieListing extends StatelessWidget {
+class MovieListing extends StatefulWidget {
   const MovieListing({super.key});
 
   @override
+  State<MovieListing> createState() {
+    return _MovieListingState();
+  }
+}
+
+class _MovieListingState extends State<MovieListing> {
+  int _quantity = 0;
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  return Scaffold(
       appBar: AppBar(
         title: const Text(appTitle, style: cinemaHeaderStyle),
         backgroundColor: cinemaSurface,
@@ -27,7 +36,23 @@ class MovieListing extends StatelessWidget {
             Text('Interstellar (2014) (PG-13)'),
             const SizedBox(height: 16.0),
             Text(
-              'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.')
+              'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.'
+              ),
+            const SizedBox(height: 16.0),
+            DropdownMenu<int>(
+              initialSelection: 0,
+              onSelected: (int? value) {
+                if (value != null) {
+                  setState(() {
+                    _quantity = value;
+                  });
+                }
+              },
+              dropdownMenuEntries: [
+                for (int i = 0; i <= 5; i++)
+                  DropdownMenuEntry(value: i, label: '$i')
+              ],
+            )
           ],
         )
       )
