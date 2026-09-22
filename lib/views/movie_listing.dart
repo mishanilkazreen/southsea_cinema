@@ -28,7 +28,6 @@ class _MovieListingState extends State<MovieListing> {
       body: Container(
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          border: Border.all(color: cinemaBrand),
           color: cinemaSurface
         ),
         child: Column(
@@ -37,16 +36,27 @@ class _MovieListingState extends State<MovieListing> {
           children: [
             Text(
               'Interstellar (2014) (PG-13)',
-              style: Theme.of(context).textTheme.headlineLarge,
+              style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                color: cinemaFontWhite,
+              ),
             ),
             const Text(
-              'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.'
+              'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.',
+              style: TextStyle(color: cinemaFontWhite),
               ),
-            const Text('Southsea Cinema Room\nWednesday 23rd Sep 2026, 18:00 - ends at 19:54'),
-            const Text('Please note that Discounts / Membership Benefits will be applied once you have selected your tickets\nSelect Quantities (Up to 5 in total)'),
+            const Text(
+              'Southsea Cinema Room\nWednesday 23rd Sep 2026, 18:00 - ends at 19:54',
+              style: TextStyle(color: cinemaFontWhite),
+            ),
+            const Text(
+              'Please note that Discounts / Membership Benefits will be applied once you have selected your tickets\nSelect Quantities (Up to 5 in total)',
+              style: TextStyle(color: cinemaFontWhite),
+            ),
             Text(
               'Tickets',
-              style: Theme.of(context).textTheme.headlineSmall
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                color: cinemaFontWhite,
+              ),
             ),
             Row(
               spacing: 16.0,
@@ -65,19 +75,29 @@ class _MovieListingState extends State<MovieListing> {
                       DropdownMenuEntry(value: i, label: '$i')
                   ],
                 ),
-                const Text("Adults (£7.50)")
+                const Text(
+                  "Adults (£7.50)",
+                  style: TextStyle(color: cinemaFontWhite),
+                )
               ],
             ),
             ElevatedButton(
               // TO-DO: Convert to a Popup Notification
-              onPressed: () { 
+              style: ElevatedButton.styleFrom(
+                backgroundColor: cinemaBrandDark,
+                foregroundColor: cinemaFontWhite,
+              ),
+              onPressed: () {
                 setState(() {
                   _feedbackMessage = '$_quantity tickets added to order';
                 });
               },
               child: const Text('ADD TO ORDER')
             ),
-            Text(_feedbackMessage), // TO-DO: Convert to a Popup Notification
+            Text(
+              _feedbackMessage,
+              style: const TextStyle(color: cinemaFontWhite),
+            ), // TO-DO: Convert to a Popup Notification
           ],
         )
       )
