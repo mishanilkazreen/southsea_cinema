@@ -58,28 +58,58 @@ class _MovieListingState extends State<MovieListing> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Row(
-              spacing: 16.0,
-              children: [
-                DropdownMenu<int>(
-                  initialSelection: 0,
-                  onSelected: (int? value) {
-                    if (value != null) {
-                      setState(() {
-                        _quantity = value;
-                      });
-                    }
-                  },
-                  dropdownMenuEntries: [
-                    for (int i = 0; i <= 5; i++)
-                      DropdownMenuEntry(value: i, label: '$i')
-                  ],
-                ),
-                const Text(
-                  "Adults (£7.50)",
-                  style: TextStyle(color: cinemaFontWhite),
-                )
-              ],
+            LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth > 250) {
+                  return Row(
+                    spacing: 16.0,
+                    children: [
+                      DropdownMenu<int>(
+                        initialSelection: 0,
+                        onSelected: (int? value) {
+                          if (value != null) {
+                            setState(() {
+                              _quantity = value;
+                            });
+                          }
+                        },
+                        dropdownMenuEntries: [
+                          for (int i = 0; i <= 5; i++)
+                            DropdownMenuEntry(value: i, label: '$i')
+                        ],
+                      ),
+                      const Text(
+                        "Adults (£7.50)",
+                        style: TextStyle(color: cinemaFontWhite),
+                      )
+                    ],
+                  );
+                } else {
+                  return Column(
+                    spacing: 16.0,
+                    children: [
+                      DropdownMenu<int>(
+                        initialSelection: 0,
+                        onSelected: (int? value) {
+                          if (value != null) {
+                            setState(() {
+                              _quantity = value;
+                            });
+                          }
+                        },
+                        dropdownMenuEntries: [
+                          for (int i = 0; i <= 5; i++)
+                            DropdownMenuEntry(value: i, label: '$i')
+                        ],
+                      ),
+                      const Text(
+                        "Adults (£7.50)",
+                        style: TextStyle(color: cinemaFontWhite),
+                      )
+                    ],
+                  );
+                }
+              },
             ),
             ElevatedButton(
               // TO-DO: Convert to a Popup Notification
