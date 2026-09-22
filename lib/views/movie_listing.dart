@@ -20,16 +20,13 @@ class _MovieListingState extends State<MovieListing> {
   return Scaffold(
       appBar: AppBar(
         title: const Text(appTitle, style: cinemaHeaderStyle),
-        backgroundColor: cinemaSurface,
+        backgroundColor: cinemaSurface, 
         iconTheme: const IconThemeData(color: cinemaBrand),
         elevation: 0,
       ),
       drawer: const NavDrawer(),
       body: Container(
         padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: cinemaSurface
-        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           spacing: 16.0,
