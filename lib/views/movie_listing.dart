@@ -33,28 +33,41 @@ class _MovieListingState extends State<MovieListing> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          spacing: 16.0,
           children: [
-            Text('Interstellar (2014) (PG-13)'),
-            const SizedBox(height: 16.0),
             Text(
+              'Interstellar (2014) (PG-13)',
+              style: Theme.of(context).textTheme.headlineLarge,
+            ),
+            const Text(
               'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.'
               ),
-            const SizedBox(height: 16.0),
-            DropdownMenu<int>(
-              initialSelection: 0,
-              onSelected: (int? value) {
-                if (value != null) {
-                  setState(() {
-                    _quantity = value;
-                  });
-                }
-              },
-              dropdownMenuEntries: [
-                for (int i = 0; i <= 5; i++)
-                  DropdownMenuEntry(value: i, label: '$i')
+            const Text('Southsea Cinema Room\nWednesday 23rd Sep 2026, 18:00 - ends at 19:54'),
+            const Text('Please note that Discounts / Membership Benefits will be applied once you have selected your tickets\nSelect Quantities (Up to 5 in total)'),
+            Text(
+              'Tickets',
+              style: Theme.of(context).textTheme.headlineSmall
+            ),
+            Row(
+              spacing: 16.0,
+              children: [
+                DropdownMenu<int>(
+                  initialSelection: 0,
+                  onSelected: (int? value) {
+                    if (value != null) {
+                      setState(() {
+                        _quantity = value;
+                      });
+                    }
+                  },
+                  dropdownMenuEntries: [
+                    for (int i = 0; i <= 5; i++)
+                      DropdownMenuEntry(value: i, label: '$i')
+                  ],
+                ),
+                const Text("Adults (£7.50)")
               ],
             ),
-            const SizedBox(height: 16.0),
             ElevatedButton(
               // TO-DO: Convert to a Popup Notification
               onPressed: () { 
@@ -64,7 +77,6 @@ class _MovieListingState extends State<MovieListing> {
               },
               child: const Text('ADD TO ORDER')
             ),
-            const SizedBox(height: 16.0),
             Text(_feedbackMessage), // TO-DO: Convert to a Popup Notification
           ],
         )
