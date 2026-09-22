@@ -12,7 +12,7 @@ class MovieListing extends StatefulWidget {
 }
 
 class _MovieListingState extends State<MovieListing> {
-  int _quantity = 0;
+  int _adultQuantity = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -64,57 +64,40 @@ class _MovieListingState extends State<MovieListing> {
                 ),
                 LayoutBuilder(
                   builder: (context, constraints) {
+                    final ticketBookingWidget = [
+                        DropdownMenu<int>(
+                          initialSelection: 0,
+                          onSelected: (int? value) {
+                            if (value != null) {
+                              setState(() {
+                                _adultQuantity = value;
+                              });
+                            }
+                          },
+                          dropdownMenuEntries: [
+                            for (int i = 0; i <= 5; i++)
+                              DropdownMenuEntry(value: i, label: '$i')
+                          ],
+                        ),
+                        const Text(
+                          "Adults (£7.50)",
+                          style: TextStyle(color: cinemaFontWhite),
+                        )
+                    ];
+                    
                     if (constraints.maxWidth > 260) {
                       return Row(
                         spacing: 16.0,
-                        children: [
-                          DropdownMenu<int>(
-                            initialSelection: 0,
-                            onSelected: (int? value) {
-                              if (value != null) {
-                                setState(() {
-                                  _quantity = value;
-                                });
-                              }
-                            },
-                            dropdownMenuEntries: [
-                              for (int i = 0; i <= 5; i++)
-                                DropdownMenuEntry(value: i, label: '$i')
-                            ],
-                          ),
-                          const Text(
-                            "Adults (£7.50)",
-                            style: TextStyle(color: cinemaFontWhite),
-                          )
-                        ],
+                        children: ticketBookingWidget
                       );
                     } else {
                       return Column(
                         spacing: 16.0,
-                        children: [
-                          DropdownMenu<int>(
-                            initialSelection: 0,
-                            onSelected: (int? value) {
-                              if (value != null) {
-                                setState(() {
-                                  _quantity = value;
-                                });
-                              }
-                            },
-                            dropdownMenuEntries: [
-                              for (int i = 0; i <= 5; i++)
-                                DropdownMenuEntry(value: i, label: '$i')
-                            ],
-                          ),
-                          const Text(
-                            "Adults (£7.50)",
-                            style: TextStyle(color: cinemaFontWhite),
-                          )
-                        ],
+                        children: ticketBookingWidget,
                       );
                     }
-                  },
-                ),
+                  }
+                ), 
                 // Add to Order Button
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -124,11 +107,12 @@ class _MovieListingState extends State<MovieListing> {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           content:
-                              Text('$_quantity adult tickets added to order')));
+                              Text('$_adultQuantity adult tickets added to order')));
                     },
-                    child: const Text(
-                        'ADD TO ORDER')),
+                    child: const Text('ADD TO ORDER')),
               ],
-            )));
+            )
+        )
+    );
   }
 }
