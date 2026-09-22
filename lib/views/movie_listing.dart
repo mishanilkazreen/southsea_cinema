@@ -64,7 +64,7 @@ class _MovieListingState extends State<MovieListing> {
                 ),
                 LayoutBuilder(
                   builder: (context, constraints) {
-                    if (constraints.maxWidth > 600) {
+                    if (constraints.maxWidth > 260) {
                       return Row(
                         spacing: 16.0,
                         children: [
