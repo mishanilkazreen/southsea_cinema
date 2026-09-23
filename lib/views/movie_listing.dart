@@ -14,6 +14,12 @@ class MovieListing extends StatefulWidget {
 class _MovieListingState extends State<MovieListing> {
   int _adultQuantity = 0;
 
+  void _ticketsPopup() {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content:
+          Text('$_adultQuantity adult tickets added to order')));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +70,7 @@ class _MovieListingState extends State<MovieListing> {
                 ),
                 LayoutBuilder(
                   builder: (context, constraints) {
-                    final ticketBookingWidget = [
+                    final List<Widget> ticketBookingWidget = [
                         DropdownMenu<int>(
                           initialSelection: 0,
                           textStyle: const TextStyle(color: cinemaSurface),
@@ -109,11 +115,7 @@ class _MovieListingState extends State<MovieListing> {
                       backgroundColor: cinemaBrandDark,
                       foregroundColor: cinemaFontWhite,
                     ),
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content:
-                              Text('$_adultQuantity adult tickets added to order')));
-                    },
+                    onPressed: _ticketsPopup,
                     child: const Text('ADD TO ORDER')),
               ],
             )
