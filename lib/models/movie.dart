@@ -5,6 +5,7 @@ class Movie {
   final int publishedYear;
   final String description;
   final String imagePath;
+  final int ticketPrice;
 
   const Movie({
     required this.id,
@@ -12,6 +13,7 @@ class Movie {
     required this.ageRating,
     required this.publishedYear,
     required this.description,
-    required this.imagePath
+    required this.imagePath,
+    required this.ticketPrice,
     });
 }
