@@ -11,6 +11,9 @@ class MovieRepository {
         description: "When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.",
         imagePath: 'assets/images/interstellar.jpg',
         ticketPrice: 1000,
+        screenings: [
+          'Thursday 15th Oct 2026, 15:00',
+        ],
       ),
       Movie(
         id: "prison_of_azkaban_hp",
@@ -19,7 +22,10 @@ class MovieRepository {
         publishedYear: 1999,
         description: "Harry Potter, Ron and Hermione return to Hogwarts School of Witchcraft and Wizardry for their third year of study, where they delve into the mystery surrounding an escaped prisoner who poses a dangerous threat to the young wizard.",
         imagePath: 'assets/images/prison_of_azkaban_hp.jpg',
-        ticketPrice: 10000,
+        ticketPrice: 1000,
+        screenings: [
+          'Friday 16th Oct 2026, 19:00',
+        ],
       ),
     ];
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/views/movie_listing.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -26,7 +27,7 @@ class MovieCard extends StatelessWidget {
                 Image.asset(
                   movie.imagePath,
                   width: 80,
-                  height: 80,
+                  height: 120,
                   fit: BoxFit.cover,
                 ),
                 Expanded(
@@ -69,13 +70,25 @@ class MovieCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // Ticket Price
-                Text(
-                  '£${(movie.ticketPrice / 100).toStringAsFixed(2)}',
-                  style: const TextStyle(
-                    color: cinemaFontWhite,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
+                // Booking Times
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 4.0,
+                    children: [
+                      const Text(
+                        'Book Tickets',
+                        style: TextStyle(
+                          color: cinemaFontWhite,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        movie.screenings.join('\n'),
+                        style: const TextStyle(color: cinemaFontWhite),
+                      ),
+                    ],
                   ),
                 ),
                 // Book Now Button
@@ -84,7 +97,14 @@ class MovieCard extends StatelessWidget {
                     backgroundColor: cinemaBrandDark,
                     foregroundColor: cinemaFontWhite,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => MovieListing(movie: movie),
+                      ),
+                    );
+                  },
                   child: const Text('BOOK NOW'),
                 ),
               ],

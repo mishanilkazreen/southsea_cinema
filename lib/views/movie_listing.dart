@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/movie.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
 class MovieListing extends StatefulWidget {
-  const MovieListing({super.key});
+  final Movie movie;
+
+  const MovieListing({super.key, required this.movie});
 
   @override
   State<MovieListing> createState() {
@@ -22,6 +25,9 @@ class _MovieListingState extends State<MovieListing> {
 
   @override
   Widget build(BuildContext context) {
+    final Movie movie = widget.movie;
+    final String price = (movie.ticketPrice / 100).toStringAsFixed(2);
+
     return Scaffold(
         appBar: AppBar(
           title: const Text(appTitle, style: cinemaHeaderStyle),
@@ -37,23 +43,23 @@ class _MovieListingState extends State<MovieListing> {
               spacing: 16.0,
               children: [
                 // Movie Title
-                const Text(
-                  'Interstellar (2014) (PG-13)',
-                  style: TextStyle(
+                Text(
+                  '${movie.name} (${movie.publishedYear}) (${movie.ageRating})',
+                  style: const TextStyle(
                     color: cinemaFontWhite,
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 // Movie Description
-                const Text(
-                  'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.',
-                  style: TextStyle(color: cinemaFontWhite),
+                Text(
+                  movie.description,
+                  style: const TextStyle(color: cinemaFontWhite),
                 ),
                 // Booking Information
-                const Text(
-                  'Southsea Cinema Room\nWednesday 23rd Sep 2026, 18:00 - ends at 19:54',
-                  style: TextStyle(color: cinemaFontWhite),
+                Text(
+                  'Southsea Cinema Room\n${movie.screenings.join('\n')}',
+                  style: const TextStyle(color: cinemaFontWhite),
                 ),
                 const Text(
                   'Please note that Discounts / Membership Benefits will be applied once you have selected your tickets\nSelect Quantities (Up to 5 in total)',
@@ -90,9 +96,9 @@ class _MovieListingState extends State<MovieListing> {
                               DropdownMenuEntry(value: i, label: '$i')
                           ],
                         ),
-                        const Text(
-                          "Adults (£7.50)",
-                          style: TextStyle(color: cinemaFontWhite),
+                        Text(
+                          'Adults (£$price)',
+                          style: const TextStyle(color: cinemaFontWhite),
                         )
                     ];
                     

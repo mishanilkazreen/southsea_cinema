@@ -6,6 +6,7 @@ class Movie {
   final String description;
   final String imagePath;
   final int ticketPrice;
+  final List<String> screenings;
 
   const Movie({
     required this.id,
@@ -15,5 +16,6 @@ class Movie {
     required this.description,
     required this.imagePath,
     required this.ticketPrice,
+    required this.screenings,
     });
 }
