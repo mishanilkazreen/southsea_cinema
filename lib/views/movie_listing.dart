@@ -19,8 +19,7 @@ class _MovieListingState extends State<MovieListing> {
 
   void _ticketsPopup() {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content:
-          Text('$_adultQuantity adult tickets added to order')));
+        content: Text('$_adultQuantity adult tickets added to order')));
   }
 
   @override
@@ -74,47 +73,40 @@ class _MovieListingState extends State<MovieListing> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                LayoutBuilder(
-                  builder: (context, constraints) {
-                    final List<Widget> ticketBookingWidget = [
-                        DropdownMenu<int>(
-                          initialSelection: 0,
-                          textStyle: const TextStyle(color: cinemaSurface),
-                          inputDecorationTheme: const InputDecorationTheme(
-                            filled: true,
-                            fillColor: cinemaFontWhite
-                          ),
-                          onSelected: (int? value) {
-                            if (value != null) {
-                              setState(() {
-                                _adultQuantity = value;
-                              });
-                            }
-                          },
-                          dropdownMenuEntries: [
-                            for (int i = 0; i <= 5; i++)
-                              DropdownMenuEntry(value: i, label: '$i')
-                          ],
-                        ),
-                        Text(
-                          'Adults (£$price)',
-                          style: const TextStyle(color: cinemaFontWhite),
-                        )
-                    ];
-                    
-                    if (constraints.maxWidth > 260) {
-                      return Row(
-                        spacing: 16.0,
-                        children: ticketBookingWidget
-                      );
-                    } else {
-                      return Column(
-                        spacing: 16.0,
-                        children: ticketBookingWidget,
-                      );
-                    }
+                LayoutBuilder(builder: (context, constraints) {
+                  final List<Widget> ticketBookingWidget = [
+                    DropdownMenu<int>(
+                      initialSelection: 0,
+                      textStyle: const TextStyle(color: cinemaSurface),
+                      inputDecorationTheme: const InputDecorationTheme(
+                          filled: true, fillColor: cinemaFontWhite),
+                      onSelected: (int? value) {
+                        if (value != null) {
+                          setState(() {
+                            _adultQuantity = value;
+                          });
+                        }
+                      },
+                      dropdownMenuEntries: [
+                        for (int i = 0; i <= 5; i++)
+                          DropdownMenuEntry(value: i, label: '$i')
+                      ],
+                    ),
+                    Text(
+                      'Adults (£$price)',
+                      style: const TextStyle(color: cinemaFontWhite),
+                    )
+                  ];
+
+                  if (constraints.maxWidth > 260) {
+                    return Row(spacing: 16.0, children: ticketBookingWidget);
+                  } else {
+                    return Column(
+                      spacing: 16.0,
+                      children: ticketBookingWidget,
+                    );
                   }
-                ), 
+                }),
                 // Add to Order Button
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
@@ -124,8 +116,6 @@ class _MovieListingState extends State<MovieListing> {
                     onPressed: _ticketsPopup,
                     child: const Text('ADD TO ORDER')),
               ],
-            )
-        )
-    );
+            )));
   }
 }
