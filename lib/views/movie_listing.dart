@@ -25,7 +25,6 @@ class _MovieListingState extends State<MovieListing> {
   @override
   Widget build(BuildContext context) {
     final Movie movie = widget.movie;
-    final String price = (movie.ticketPrice / 100).toStringAsFixed(2);
 
     return Scaffold(
         appBar: AppBar(
@@ -93,7 +92,7 @@ class _MovieListingState extends State<MovieListing> {
                       ],
                     ),
                     Text(
-                      'Adults (£$price)',
+                      'Adults (${movie.formattedPrice})',
                       style: const TextStyle(color: cinemaFontWhite),
                     )
                   ];

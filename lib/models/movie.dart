@@ -17,5 +17,11 @@ class Movie {
     required this.imagePath,
     required this.ticketPrice,
     required this.screenings,
-    });
+  });
+
+  String get formattedPrice => '£${(ticketPrice / 100).toStringAsFixed(2)}';
+
+  bool get isChildFriendly => ageRating == 'U' || ageRating == 'PG';
+
+  bool get isAdultOnly => ageRating == '18';
 }
