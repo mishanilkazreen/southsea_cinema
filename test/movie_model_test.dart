@@ -56,7 +56,7 @@ void main() {
       expect(movie.isAdultOnly, false);
     });
 
-    test('Check U rated movie access only for adults', () {
+    test('Check PG rated movie access for child and adults', () {
       const movie = Movie(
         id: 'test-movie',
         name: 'Test Movie',
