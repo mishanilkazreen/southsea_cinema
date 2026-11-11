@@ -26,11 +26,7 @@ class HomeView extends StatelessWidget {
             children: [
               Text(
                 'Welcome to $appTitle',
-                style: TextStyle(
-                  color: cinemaFontWhite,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: cinemaSectionTitleStyle,
               ),
             ],
           ),

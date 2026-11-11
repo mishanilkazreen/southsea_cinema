@@ -43,11 +43,7 @@ class _MovieListingState extends State<MovieListing> {
                 // Movie Title
                 Text(
                   '${movie.name} (${movie.publishedYear}) (${movie.ageRating})',
-                  style: const TextStyle(
-                    color: cinemaFontWhite,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: cinemaSectionTitleStyle,
                 ),
                 // Movie Description
                 Text(
