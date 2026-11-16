@@ -16,12 +16,19 @@ class SouthseaCinemaApp extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: cinemaBackground,
+      theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: cinemaBrand,
           primary: cinemaBrand,
           surface: cinemaSurface,
+          brightness: Brightness.dark,
+        ),
+        scaffoldBackgroundColor: cinemaBackground,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: cinemaSurface,
+          iconTheme: IconThemeData(color: cinemaBrand),
+          titleTextStyle: cinemaHeaderStyle,
+          elevation: 0,
         ),
       ),
       initialRoute: '/',
