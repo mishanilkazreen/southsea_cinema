@@ -92,11 +92,8 @@ class MovieCard extends StatelessWidget {
                   ),
                 ),
                 // Book Now Button
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: cinemaBrandDark,
-                    foregroundColor: cinemaFontWhite,
-                  ),
+                PrimaryButton(
+                  label: 'BOOK NOW',
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -105,7 +102,6 @@ class MovieCard extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('BOOK NOW'),
                 ),
               ],
             ),
