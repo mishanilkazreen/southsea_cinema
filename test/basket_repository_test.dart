@@ -9,7 +9,7 @@ const Movie testMovie1 = Movie(
   ageRating: 'PG',
   publishedYear: 2020,
   description: 'First test movie.',
-  imagePath: 'assets/images/test1.jpg',
+  imagePath: 'assets/images/test.jpg',
   ticketPrice: 1000,
   screenings: ['Monday 1st Jan 2026, 18:00'],
 );
@@ -20,7 +20,7 @@ const Movie testMovie2 = Movie(
   ageRating: '12A',
   publishedYear: 2021,
   description: 'Second test movie.',
-  imagePath: 'assets/images/test2.jpg',
+  imagePath: 'assets/images/test.jpg',
   ticketPrice: 600,
   screenings: ['Tuesday 2nd Jan 2026, 20:00'],
 );
@@ -35,6 +35,8 @@ void main() {
       final BasketRepository basket = BasketRepository.instance;
       expect(basket.getItems().length, 0);
       expect(basket.getTotal(), 0);
+      expect(basket.getServiceCharge(), 0);
+      expect(basket.getTotalDue(), 0);
     });
 
     test('adds items and calculates the total correctly', () {
@@ -47,6 +49,8 @@ void main() {
 
       expect(basket.getItems().length, 2);
       expect(basket.getTotal(), 2600);
+      expect(basket.getServiceCharge(), 400);
+      expect(basket.getTotalDue(), 3000);
     });
 
     test('removes items correctly', () {

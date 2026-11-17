@@ -32,4 +32,15 @@ class BasketRepository {
     }
     return total;
   }
+
+  int getServiceCharge() {
+    if (_items.isEmpty) {
+      return 0;
+    }
+    return 400;
+  }
+
+  int getTotalDue() {
+    return getTotal() + getServiceCharge();
+  }
 }
