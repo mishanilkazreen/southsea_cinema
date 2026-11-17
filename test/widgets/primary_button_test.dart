@@ -18,7 +18,8 @@ void main() {
     expect(find.text('Add'), findsOneWidget);
   });
 
-    testWidgets('PrimaryButton invokes onPressed when tapped', (WidgetTester tester) async {
+  testWidgets('PrimaryButton invokes onPressed when tapped',
+      (WidgetTester tester) async {
     bool wasPressed = false;
 
     await tester.pumpWidget(
