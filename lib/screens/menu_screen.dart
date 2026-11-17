@@ -5,23 +5,43 @@ import 'package:southsea_cinema/repositories/movie_repository.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 
-class MovieScreen extends StatelessWidget {
+class MovieScreen extends StatefulWidget {
   const MovieScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final MovieRepository repository = MovieRepository();
-    final List<Movie> movies = repository.getMovies();
+  State<MovieScreen> createState() {
+    return _MovieScreenState();
+  }
+}
 
+class _MovieScreenState extends State<MovieScreen> {
+  List<Movie> _movies = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadMovies();
+  }
+
+  Future<void> _loadMovies() async {
+    final MovieRepository repository = MovieRepository();
+    final List<Movie> movies = await repository.loadMoviesFromAsset();
+    setState(() {
+      _movies = movies;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text(appTitle),
         ),
         drawer: const NavDrawer(),
         body: ListView.builder(
-            itemCount: movies.length,
+            itemCount: _movies.length,
             itemBuilder: (context, index) {
-              return MovieCard(movie: movies[index]);
+              return MovieCard(movie: _movies[index]);
             }));
   }
 }
