@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
 import 'package:southsea_cinema/widgets/primary_button.dart';
+
+const String prefAddress = 'user_address';
+const String prefEmail = 'user_email';
+const String prefPatronNumber = 'user_patron_number';
+const String prefReceiveNews = 'user_receive_news';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -24,6 +30,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _addressController = TextEditingController();
     _emailController = TextEditingController();
     _patronNumberController = TextEditingController();
+    _loadSettings();
   }
 
   @override
@@ -34,7 +41,58 @@ class _SettingsScreenState extends State<SettingsScreen> {
     super.dispose();
   }
 
-  void _saveSettings() {
+  Future<void> _loadSettings() async {
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+    final String? savedAddress = await prefs.getString(prefAddress);
+    final String? savedEmail = await prefs.getString(prefEmail);
+    final String? savedPatronNumber = await prefs.getString(prefPatronNumber);
+    final bool? savedReceiveNews = await prefs.getBool(prefReceiveNews);
+
+    String address = '';
+    if (savedAddress != null) {
+      address = savedAddress;
+    }
+
+    String email = '';
+    if (savedEmail != null) {
+      email = savedEmail;
+    }
+
+    String patronNumber = '';
+    if (savedPatronNumber != null) {
+      patronNumber = savedPatronNumber;
+    }
+
+    bool receiveNews = false;
+    if (savedReceiveNews != null) {
+      receiveNews = savedReceiveNews;
+    }
+
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _addressController.text = address;
+      _emailController.text = email;
+      _patronNumberController.text = patronNumber;
+      _receiveNews = receiveNews;
+    });
+  }
+
+  Future<void> _saveSettings() async {
+    final String address = _addressController.text.trim();
+    final String email = _emailController.text.trim();
+    final String patronNumber = _patronNumberController.text.trim();
+
+    final SharedPreferencesAsync prefs = SharedPreferencesAsync();
+    await prefs.setString(prefAddress, address);
+    await prefs.setString(prefEmail, email);
+    await prefs.setString(prefPatronNumber, patronNumber);
+    await prefs.setBool(prefReceiveNews, _receiveNews);
+
+    if (!mounted) {
+      return;
+    }
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Your settings have been saved.')));
   }
