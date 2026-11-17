@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:southsea_cinema/constants.dart';
+import 'package:southsea_cinema/models/basket_item.dart';
 import 'package:southsea_cinema/models/movie.dart';
+import 'package:southsea_cinema/repositories/basket_repository.dart';
 import 'package:southsea_cinema/widgets/nav_drawer.dart';
+import 'package:southsea_cinema/widgets/primary_button.dart';
 
 class MovieListing extends StatefulWidget {
   final Movie movie;
@@ -18,6 +21,13 @@ class _MovieListingState extends State<MovieListing> {
   int _adultQuantity = 0;
 
   void _ticketsPopup() {
+    if (_adultQuantity > 0) {
+      final BasketItem item = BasketItem(
+        movie: widget.movie,
+        quantity: _adultQuantity,
+      );
+      BasketRepository.instance.addItem(item);
+    }
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('$_adultQuantity adult tickets added to order')));
   }
@@ -28,10 +38,7 @@ class _MovieListingState extends State<MovieListing> {
 
     return Scaffold(
         appBar: AppBar(
-          title: const Text(appTitle, style: cinemaHeaderStyle),
-          backgroundColor: cinemaSurface,
-          iconTheme: const IconThemeData(color: cinemaBrand),
-          elevation: 0,
+          title: const Text(appTitle),
         ),
         drawer: const NavDrawer(),
         body: Container(
@@ -43,11 +50,7 @@ class _MovieListingState extends State<MovieListing> {
                 // Movie Title
                 Text(
                   '${movie.name} (${movie.publishedYear}) (${movie.ageRating})',
-                  style: const TextStyle(
-                    color: cinemaFontWhite,
-                    fontSize: 32,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: cinemaSectionTitleStyle,
                 ),
                 // Movie Description
                 Text(
@@ -107,13 +110,10 @@ class _MovieListingState extends State<MovieListing> {
                   }
                 }),
                 // Add to Order Button
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: cinemaBrandDark,
-                      foregroundColor: cinemaFontWhite,
-                    ),
-                    onPressed: _ticketsPopup,
-                    child: const Text('ADD TO ORDER')),
+                PrimaryButton(
+                  label: 'ADD TO ORDER',
+                  onPressed: _ticketsPopup,
+                ),
               ],
             )));
   }

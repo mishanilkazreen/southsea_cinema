@@ -9,13 +9,7 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          appTitle,
-          style: cinemaHeaderStyle,
-        ),
-        backgroundColor: cinemaSurface,
-        iconTheme: const IconThemeData(color: cinemaBrand),
-        elevation: 0,
+        title: const Text(appTitle),
       ),
       drawer: const NavDrawer(),
       body: const Center(
@@ -26,11 +20,7 @@ class HomeView extends StatelessWidget {
             children: [
               Text(
                 'Welcome to $appTitle',
-                style: TextStyle(
-                  color: cinemaFontWhite,
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: cinemaSectionTitleStyle,
               ),
             ],
           ),

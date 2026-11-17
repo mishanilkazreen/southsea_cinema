@@ -3,6 +3,8 @@ import 'package:southsea_cinema/constants.dart';
 // import 'package:southsea_cinema/views/home_view.dart';
 // import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/screens/menu_screen.dart';
+import 'package:southsea_cinema/screens/basket_screen.dart';
+import 'package:southsea_cinema/screens/settings_screen.dart';
 
 void main() {
   runApp(const SouthseaCinemaApp());
@@ -16,17 +18,26 @@ class SouthseaCinemaApp extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        scaffoldBackgroundColor: cinemaBackground,
+      theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
           seedColor: cinemaBrand,
           primary: cinemaBrand,
           surface: cinemaSurface,
+          brightness: Brightness.dark,
+        ),
+        scaffoldBackgroundColor: cinemaBackground,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: cinemaSurface,
+          iconTheme: IconThemeData(color: cinemaBrand),
+          titleTextStyle: cinemaHeaderStyle,
+          elevation: 0,
         ),
       ),
       initialRoute: '/',
       routes: {
         '/': (context) => const MovieScreen(),
+        '/basket': (context) => const BasketScreen(),
+        '/settings': (context) => const SettingsScreen(),
         // '/listing': (context) => const MovieListing(),
       },
     );
