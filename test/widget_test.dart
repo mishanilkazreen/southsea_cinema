@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:southsea_cinema/constants.dart';
 import 'package:southsea_cinema/main.dart';
@@ -6,6 +7,10 @@ import 'package:southsea_cinema/views/movie_listing.dart';
 import 'package:southsea_cinema/widgets/movie_card.dart';
 
 void main() {
+  setUp(() {
+    rootBundle.clear();
+  });
+
   group('App tests', () {
     testWidgets('App displays MovieScreen as home',
         (WidgetTester tester) async {

@@ -16,6 +16,8 @@ class MovieScreen extends StatefulWidget {
 
 class _MovieScreenState extends State<MovieScreen> {
   List<Movie> _movies = [];
+  bool _loading = true;
+  String _errorMessage = '';
 
   @override
   void initState() {
@@ -24,24 +26,53 @@ class _MovieScreenState extends State<MovieScreen> {
   }
 
   Future<void> _loadMovies() async {
-    final MovieRepository repository = MovieRepository();
-    final List<Movie> movies = await repository.loadMoviesFromAsset();
-    setState(() {
-      _movies = movies;
-    });
+    try {
+      final MovieRepository repository = MovieRepository();
+      final List<Movie> movies = await repository.loadMoviesFromAsset();
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _movies = movies;
+        _loading = false;
+      });
+    } catch (error) {
+      if (!mounted) {
+        return;
+      }
+      setState(() {
+        _errorMessage = 'Could not load the films: $error';
+        _loading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: const Text(appTitle),
+    final Widget body;
+    if (_loading) {
+      body = const Center(child: CircularProgressIndicator());
+    } else if (_errorMessage.isNotEmpty) {
+      body = Center(
+        child: Text(
+          _errorMessage,
+          style: const TextStyle(color: cinemaFontWhite),
         ),
-        drawer: const NavDrawer(),
-        body: ListView.builder(
-            itemCount: _movies.length,
-            itemBuilder: (context, index) {
-              return MovieCard(movie: _movies[index]);
-            }));
+      );
+    } else {
+      body = ListView.builder(
+          itemCount: _movies.length,
+          itemBuilder: (context, index) {
+            return MovieCard(movie: _movies[index]);
+          });
+    }
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(appTitle),
+      ),
+      drawer: const NavDrawer(),
+      body: body,
+    );
   }
 }
