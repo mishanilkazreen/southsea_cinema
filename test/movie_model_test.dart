@@ -103,5 +103,48 @@ void main() {
       expect(movie.isChildFriendly, false);
       expect(movie.isAdultOnly, true);
     });
+
+    test('fromJson reads every field and toJson returns the same map', () {
+      final Map<String, dynamic> json = <String, dynamic>{
+        'id': 'test-movie',
+        'name': 'Test Movie',
+        'ageRating': 'PG',
+        'publishedYear': 2024,
+        'description': 'A movie used for testing.',
+        'imagePath': 'assets/images/test.jpg',
+        'ticketPrice': 1000,
+        'screenings': ['Monday 7pm', 'Tuesday 8pm'],
+      };
+
+      final Movie movie = Movie.fromJson(json);
+
+      expect(movie.id, 'test-movie');
+      expect(movie.name, 'Test Movie');
+      expect(movie.ageRating, 'PG');
+      expect(movie.publishedYear, 2024);
+      expect(movie.description, 'A movie used for testing.');
+      expect(movie.imagePath, 'assets/images/test.jpg');
+      expect(movie.ticketPrice, 1000);
+      expect(movie.screenings, ['Monday 7pm', 'Tuesday 8pm']);
+      expect(movie.toJson(), json);
+    });
+
+    test('fromJson turns a decimal whole-number price into an int', () {
+      final Map<String, dynamic> json = <String, dynamic>{
+        'id': 'test-movie',
+        'name': 'Test Movie',
+        'ageRating': 'PG',
+        'publishedYear': 2024,
+        'description': 'A movie used for testing.',
+        'imagePath': 'assets/images/test.jpg',
+        'ticketPrice': 600.0,
+        'screenings': <String>[],
+      };
+
+      final Movie movie = Movie.fromJson(json);
+
+      expect(movie.ticketPrice, 600);
+      expect(movie.ticketPrice, isA<int>());
+    });
   });
 }
